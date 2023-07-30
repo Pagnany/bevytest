@@ -4,7 +4,7 @@ use bevy::{
     window::{PresentMode, WindowTheme},
 };
 
-pub mod player;
+mod player;
 
 const SCREEN_WIDTH: f32 = 1280.0;
 const SCREEN_HEIGHT: f32 = 720.0;
@@ -16,7 +16,7 @@ fn main() {
         .add_plugins((
             DefaultPlugins.set(WindowPlugin {
                 primary_window: Some(Window {
-                    title: "Dodge the Cars!".into(),
+                    title: "Game".into(),
                     resolution: (SCREEN_WIDTH, SCREEN_HEIGHT).into(),
                     present_mode: PresentMode::AutoVsync,
                     window_theme: Some(WindowTheme::Dark),
