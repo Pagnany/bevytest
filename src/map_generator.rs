@@ -12,6 +12,9 @@ pub struct MapBuilder {
     pub height: usize,
 }
 
+#[derive(Component)]
+pub struct MapTile;
+
 impl MapBuilder {
     pub fn new(file: &str) -> Self {
         let rows = file_rows_to_vec(file);
@@ -45,15 +48,18 @@ pub fn build_map(map: &MapBuilder, commands: &mut Commands) {
         for tile in row.chars() {
             match tile {
                 'X' | 'x' => {
-                    commands.spawn(SpriteBundle {
-                        sprite: Sprite {
-                            color: Color::rgb(1.0, 1.0, 1.0),
-                            custom_size: Some(Vec2::new(TILE_WIDTH, TILE_HEIGHT)),
+                    commands.spawn((
+                        SpriteBundle {
+                            sprite: Sprite {
+                                color: Color::rgb(1.0, 1.0, 1.0),
+                                custom_size: Some(Vec2::new(TILE_WIDTH, TILE_HEIGHT)),
+                                ..default()
+                            },
+                            transform: Transform::from_translation(Vec3::new(x, y, 0.)),
                             ..default()
                         },
-                        transform: Transform::from_translation(Vec3::new(x, y, 0.)),
-                        ..default()
-                    });
+                        MapTile,
+                    ));
                 }
                 _ => {}
             }

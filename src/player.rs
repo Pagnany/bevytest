@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-const PLAYER_SPEED: f32 = 200.0;
+const PLAYER_SPEED: f32 = 400.0;
 
 pub const PLAYER_HEIGHT: f32 = 50.0;
 pub const PLAYER_WIDTH: f32 = 30.0;
