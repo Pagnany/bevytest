@@ -4,10 +4,11 @@ use bevy::{
     window::{PresentMode, WindowTheme},
 };
 
+mod map_generator;
 mod player;
 
-const SCREEN_WIDTH: f32 = 1280.0;
-const SCREEN_HEIGHT: f32 = 720.0;
+pub const SCREEN_WIDTH: f32 = 1280.0;
+pub const SCREEN_HEIGHT: f32 = 720.0;
 
 const FRAME_TIME: f32 = 1.0 / 144.0;
 
@@ -72,6 +73,12 @@ fn setup(mut commands: Commands) {
         },
         player::Player,
     ));
+
+    // Map
+    let map = map_generator::MapBuilder::new("maps/map1.txt");
+    println!("{:?}", map);
+    map_generator::build_map(&map, &mut commands);
+
 }
 
 fn text_update_system(
