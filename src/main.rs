@@ -11,7 +11,7 @@ mod player;
 pub const SCREEN_WIDTH: f32 = 1280.0;
 pub const SCREEN_HEIGHT: f32 = 720.0;
 
-const FRAME_TIME: f32 = 1.0 / 144.0;
+const TICK_TIME: f32 = 1.0 / 50.0;
 
 fn main() {
     App::new()
@@ -28,7 +28,7 @@ fn main() {
             }),
             FrameTimeDiagnosticsPlugin::default(),
         ))
-        .insert_resource(FixedTime::new_from_secs(FRAME_TIME))
+        .insert_resource(FixedTime::new_from_secs(TICK_TIME))
         .add_systems(Startup, setup)
         .add_systems(
             FixedUpdate,
