@@ -4,9 +4,9 @@ use bevy::{
     window::{PresentMode, WindowTheme},
 };
 
+mod collision;
 mod map_generator;
 mod player;
-mod collision;
 
 pub const SCREEN_WIDTH: f32 = 1280.0;
 pub const SCREEN_HEIGHT: f32 = 720.0;
@@ -30,7 +30,14 @@ fn main() {
         ))
         .insert_resource(FixedTime::new_from_secs(FRAME_TIME))
         .add_systems(Startup, setup)
-        .add_systems(FixedUpdate, (text_update_system, player::move_character))
+        .add_systems(
+            FixedUpdate,
+            (
+                text_update_system,
+                player::move_character,
+                collision::check_collision_with_tile,
+            ),
+        )
         .add_systems(Update, bevy::window::close_on_esc)
         .run();
 }
