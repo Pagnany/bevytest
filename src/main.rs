@@ -6,6 +6,7 @@ use bevy::{
 
 mod collision;
 mod map_generator;
+mod physics;
 mod player;
 
 pub const SCREEN_WIDTH: f32 = 1280.0;
@@ -34,6 +35,7 @@ fn main() {
             FixedUpdate,
             (
                 text_update_system,
+                physics::gravity,
                 player::move_character,
                 collision::check_collision_with_tile,
             ),
@@ -79,7 +81,9 @@ fn setup(mut commands: Commands) {
             transform: Transform::from_translation(Vec3::new(0., 0., 0.)),
             ..default()
         },
-        player::Player,
+        player::Player{
+            velocity: Vec2::new(0., 0.),
+        },
     ));
 
     // Map
