@@ -6,13 +6,13 @@ pub const PLAYER_HEIGHT: f32 = 50.0;
 pub const PLAYER_WIDTH: f32 = 30.0;
 
 #[derive(Component)]
-pub struct Player{
+pub struct Player {
     pub velocity: Vec2,
 }
 
 pub fn move_character(
     keyboard_input: Res<Input<KeyCode>>,
-    mut query: Query<(&mut Transform), With<Player>>,
+    mut query: Query<&mut Transform, With<Player>>,
     time_step: Res<FixedTime>,
 ) {
     let mut player_transform = query.single_mut();

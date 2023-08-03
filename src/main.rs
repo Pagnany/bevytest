@@ -35,7 +35,7 @@ fn main() {
             FixedUpdate,
             (
                 text_update_system,
-                physics::gravity,
+                physics::player_add_velocity_gravity,
                 player::move_character,
                 collision::check_collision_with_tile,
             ),
@@ -81,7 +81,7 @@ fn setup(mut commands: Commands) {
             transform: Transform::from_translation(Vec3::new(0., 0., 0.)),
             ..default()
         },
-        player::Player{
+        player::Player {
             velocity: Vec2::new(0., 0.),
         },
     ));
