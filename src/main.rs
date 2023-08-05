@@ -36,9 +36,9 @@ fn main() {
             (
                 text_update_system,
                 physics::player_add_velocity_gravity,
-                physics::player_update_transform,
                 player::move_character,
-                collision::check_collision_with_tile,
+                physics::player_update_transform.after(player::move_character),
+                collision::check_collision_with_tile.after(physics::player_update_transform)
             ),
         )
         .add_systems(Update, bevy::window::close_on_esc)
@@ -84,7 +84,7 @@ fn setup(mut commands: Commands) {
         },
         player::Player {
             velocity: Vec2::new(0., 0.),
-            movement: player::PlayerMovement::Falling,
+            movement: player::PlayerMovement::Idle,
         },
     ));
 
