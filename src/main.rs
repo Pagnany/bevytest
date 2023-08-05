@@ -84,7 +84,7 @@ fn setup(mut commands: Commands) {
         },
         player::Player {
             velocity: Vec2::new(0., 0.),
-            movement: player::PlayerMovement::Idle,
+            movement: player::PlayerMovement::Falling,
         },
     ));
 
