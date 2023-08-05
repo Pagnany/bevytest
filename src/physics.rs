@@ -4,12 +4,12 @@ const GRAVITY: f32 = 9.8 * 100.0;
 
 pub fn player_add_velocity_gravity(
     mut query_player: Query<&mut crate::player::Player, With<crate::player::Player>>,
-    time: Res<Time>,
+    time_step: Res<FixedTime>,
 ) {
     match query_player.single_mut().movement {
         crate::player::PlayerMovement::Falling => {
             let mut player = query_player.single_mut();
-            player.velocity.y -= GRAVITY * time.delta_seconds();
+            player.velocity.y -= GRAVITY * time_step.period.as_secs_f32();
             if player.velocity.y < -500.0 {
                 player.velocity.y = -500.0;
             }
