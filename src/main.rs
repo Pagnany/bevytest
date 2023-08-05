@@ -36,6 +36,7 @@ fn main() {
             (
                 text_update_system,
                 physics::player_add_velocity_gravity,
+                physics::player_update_transform,
                 player::move_character,
                 collision::check_collision_with_tile,
             ),
@@ -83,6 +84,7 @@ fn setup(mut commands: Commands) {
         },
         player::Player {
             velocity: Vec2::new(0., 0.),
+            movement: player::PlayerMovement::Falling,
         },
     ));
 
