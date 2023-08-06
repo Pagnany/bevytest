@@ -72,3 +72,24 @@ fn is_player_overlapping_tile(player_transform: &Transform, tile_transform: &Tra
         && player_top > tile_bottom
         && player_bottom < tile_top
 }
+
+pub fn is_player_standing_on_tile(
+    query_tiles: Query<&Transform, (With<map_generator::MapTile>, Without<player::Player>)>,
+    mut query_player: Query<
+        (&mut crate::player::Player, &Transform),
+        (With<player::Player>, Without<map_generator::MapTile>),
+    >,
+) {
+    let (mut player, player_transform) = query_player.single_mut();
+
+    for tile_transform in &mut query_tiles.iter() {
+        let mut temp_tile_transform = tile_transform.clone();
+        temp_tile_transform.translation.y += 1.0;
+        if is_player_overlapping_tile(&player_transform, &temp_tile_transform) {
+            player.movement = crate::player::PlayerMovement::Idle;
+            player.velocity.y = 0.0;
+        }else {
+            player.movement = crate::player::PlayerMovement::Falling;
+        }
+    }
+}
